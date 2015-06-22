@@ -2,17 +2,23 @@
 #include <cstdlib>
 #include <ctime>
 #include "genMino.h"
+#include <new>
+
 using namespace std;
 int main()
 {
-	Mino * mino_ptr;
+	try{
+		Mino * mino_ptr;
 	
-	srandom(time(NULL));
-	for(int i=0;i<3;++i)
-	{
-		mino_ptr = genMino();
-		mino_ptr->paint();
-		delete mino_ptr;
+		srandom(time(NULL));
+		for(int i=0;i<50;++i)
+		{
+			mino_ptr = genMino();
+		}
+	}
+	catch(bad_alloc & memoryAlloc){
+		cerr << "Exception: "<<
+						memoryAlloc.what() << endl;
 	}
 	return 0;
 }
